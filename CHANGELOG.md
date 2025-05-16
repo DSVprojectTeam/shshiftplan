@@ -4,7 +4,12 @@ All notable changes to this project will be documented in this file.
 
 # ToDo List
 - Add cross hub calendar of bank holidays
-- There is a proposal to make a row smaller.
+- Add new shifts HDVL
+- Correct legend according to the excel file sheet "shifts". Make also explanation in a legend to a employee tasks
+- prepare about page
+
+## [1.0.5] 16.05.2025
+- [CHANGE] Change in legend.html. Removed unnecessary shifts and added another column which explains agent tasks. 
 
 ## [1.0.4] 14.04.2025
 - [CHANGE] empty spaces in excel is now displayed as "N/A" (it was "nan" before)
