@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block body_content %}
+    
+
+<div class="container">
+    <h1 class="text-center">DSV Service Desk Schedule</h1>
+    <p class="lh-3">
+        The ShiftPlan page is designed to streamline and organize the scheduling needs of our Service Desk team. It provides a clear, real-time overview of team shifts, ensuring optimal coverage and efficient resource allocation to meet service demands.
+    </p>
+</div>
+
+
+<div class="container bg-light border rounded p-3">
+    <h1>Admins &amp Editors</h1>
+    <table class="table table-light table-bordered">
+        <thead>
+            <tr class ="table-secondary">
+                <th>Admin</th>
+                <th>Editor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Rafał Kowalik</td>
+                <td>Jakub Kryspin</td>
+            </tr>
+            <tr>
+                <td>Michał Grysiński</td>
+                <td>Konrad Brewiński</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<pre><code>
+        <div id="changelog" class="container bg-light border rounded my-6 p-3">
+        </div>
+    
+</code></pre>
+
+<script>
+    const changelogUrl = "https://raw.githubusercontent.com/DSVprojectTeam/shshiftplan/refs/heads/main/CHANGELOG.md";
+
+    fetch(changelogUrl)
+        .then(res => res.text())
+        .then(markdown => {
+            document.getElementById("changelog").innerHTML = marked.parse(markdown);
+        })
+        .catch(err => {
+            document.getElementById("changelog").innerText = "Błąd podczas pobierania changeloga.";
+            console.error(err);
+        });
+</script>
+
+
+{% endblock %}
