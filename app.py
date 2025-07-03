@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, send_file, jsonify
 import pandas as pd
-from datetime import datetime
+from datetime import datetime, timedelta
+from calendar import monthrange
 import io
 
 app = Flask(__name__)
@@ -125,18 +126,20 @@ def dayoff_show_summary():
         df["VL"] = df.iloc[:, 4:35].apply(lambda row: (row == "VL").sum(), axis=1)
         df["O"] = df.iloc[:, 4:35].apply(lambda row: (row == "O").sum(), axis=1)
         df["DD"] = df.iloc[:, 4:35].apply(lambda row: (row == "DD").sum(), axis=1)
+        df["RB"] = df.iloc[:, 4:35].apply(lambda row: (row == "RB").sum(), axis=1)
 
         for _, row in df.iterrows():
             agent = row["Agent Name"]
             if agent not in yearly_summary:
-                yearly_summary[agent] = {"SL": 0, "VL": 0, "O": 0, "DD": 0}
+                yearly_summary[agent] = {"SL": 0, "VL": 0, "O": 0, "DD": 0, "RB": 0 }
             yearly_summary[agent]["SL"] += row["SL"]
             yearly_summary[agent]["VL"] += row["VL"]
             yearly_summary[agent]["O"] += row["O"]
             yearly_summary[agent]["DD"] += row["DD"]
+            yearly_summary[agent]["RB"] += row["RB"]
 
     summary_df = pd.DataFrame.from_dict(yearly_summary, orient='index').reset_index()
-    summary_df.columns = ["Agent Name", "SL", "VL", "O", "DD"]
+    summary_df.columns = ["Agent Name", "SL", "VL", "O", "DD", "RB"]
     return render_template("dayoff_show_summary.html", tables=[summary_df.to_html(classes='table table-striped', index=False)])
 
 @app.route('/general_stats')
@@ -150,6 +153,14 @@ def time_cal():
 @app.route('/allocation')
 def allocation():
     return render_template('allocation.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/bank_holidays')
+def bank_holidays():
+    return render_template('bank_holidays.html')
 
 @app.route('/working_days')
 def working_days():
@@ -245,6 +256,16 @@ def get_availability():
     result['Manila'] = region_counts
     result['ManilaSpecial'] = manila_special
     result['ManilaUnavailable'] = manila_unavailable
+
+    selected_month = datetime.strptime(selected_date, "%Y-%m-%d").replace(day=1)
+    days_in_month = monthrange(selected_month.year, selected_month.month)[1]
+
+    df_clean = df.fillna("").astype(str).map(lambda x: x.strip())
+    count = df_clean.isin(WORKING_DAYS).sum().sum()
+    avg = count/days_in_month
+    round(avg, 2)
+
+    result['averageOnlineAgents'] = round(avg, 2)
 
     return jsonify(result)
 

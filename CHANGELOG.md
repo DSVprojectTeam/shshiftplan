@@ -3,11 +3,20 @@
 All notable changes to this project will be documented in this file.
 
 # ToDo List
-- Add cross hub calendar of bank holidays
 - Add new shifts HDVL
-- Correct legend according to the excel file sheet "shifts". Make also explanation in a legend to a employee tasks
-- prepare about page
+- Restructure schedule.html code using Jinja module
 
+
+## [1.0.7] 3.07.2025
+- [CHANGE] Corrected About page. Added limitation of the table, small corrections in the style (small font, removed <pre>)
+- [NEW] Added Bank Holiday sub-page in More menu.
+- [NEW] Added RB column in Day Off Summary so TL can quickly check how many times employee worked on bank holiday. 
+- [NEW] Added in General Stats average daily number of agents on online shifts in the month
+
+## [1.0.6] 16.06.2025
+- [NEW] Added About page.
+- [CHANGE] Change in footer.html. Added contact g.i.dl.sdprojects@dsv.com email address.
+  
 ## [1.0.5] 16.05.2025
 - [CHANGE] Change in legend.html. Removed unnecessary shifts and added another column which explains agent tasks. 
 
@@ -27,7 +36,7 @@ All notable changes to this project will be documented in this file.
 - [NEW] Added in More -> Manila Home Office page.
 - [FIX] Unfied format of the cloaks in General Stats. Time marks are now shown in format AM/PM
 - [CHANGE] removed sliders from schedule (Alvin requesr)
-- [NEW] Added slection of HUB (dropdown list) in Working days
+- [NEW] Added selection of HUB (dropdown list) in Working days
 
 ## [1.0.0] 1.04.2025
 - First version release

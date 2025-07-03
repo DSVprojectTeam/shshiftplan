@@ -33,6 +33,7 @@
         font-weight: bold;
         z-index: 10;
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        cursor: pointer;
     }
 
     .table-wrapper::-webkit-scrollbar {
@@ -70,6 +71,14 @@
         font-weight: 600;
         color: #333;
     }
+
+    .sort-asc::after {
+        content: " 🔼";
+    }
+
+    .sort-desc::after {
+        content: " 🔽";
+    }
 </style>
 
 <div class="container mt-0 mb-5">
@@ -86,6 +95,7 @@
 </div>
 
 <script>
+    // Search filter
     document.getElementById("searchInput").addEventListener("keyup", function () {
         const filter = this.value.toLowerCase();
         const tables = document.querySelectorAll(".table-wrapper table");
@@ -96,6 +106,36 @@
                 let rowText = rows[i].innerText.toLowerCase();
                 rows[i].style.display = rowText.includes(filter) ? "" : "none";
             }
+        });
+    });
+
+    // Column sorting
+    document.querySelectorAll(".table-wrapper table").forEach(table => {
+        const headers = table.querySelectorAll("th");
+        headers.forEach((header, columnIndex) => {
+            header.addEventListener("click", () => {
+                const isAsc = header.classList.contains("sort-asc");
+                headers.forEach(h => h.classList.remove("sort-asc", "sort-desc"));
+                header.classList.toggle("sort-asc", !isAsc);
+                header.classList.toggle("sort-desc", isAsc);
+
+                const rows = Array.from(table.querySelectorAll("tbody tr"));
+                rows.sort((a, b) => {
+                    const aText = a.cells[columnIndex].innerText.trim();
+                    const bText = b.cells[columnIndex].innerText.trim();
+
+                    const aVal = isNaN(aText) ? aText.toLowerCase() : parseFloat(aText);
+                    const bVal = isNaN(bText) ? bText.toLowerCase() : parseFloat(bText);
+
+                    if (aVal < bVal) return isAsc ? 1 : -1;
+                    if (aVal > bVal) return isAsc ? -1 : 1;
+                    return 0;
+                });
+
+                const tbody = table.querySelector("tbody");
+                tbody.innerHTML = '';
+                rows.forEach(row => tbody.appendChild(row));
+            });
         });
     });
 </script>

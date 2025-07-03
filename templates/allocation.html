@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block body_content %}
-<h2 class="text-center mb-4">📢 Allocation</h2>
 
-<div style="text-align: center;">
-  <img src="{{ url_for('static', filename='SiteAllocation.png') }}" alt="allocation" />
+<div style="display: flex; justify-content: center; align-items: center;">
+  <img src="{{ url_for('static', filename='SiteAllocation.png') }}" alt="allocation" style="max-width: 100%; height: auto;" />
 </div>
+
 {% endblock %}

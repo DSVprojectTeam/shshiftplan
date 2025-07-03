@@ -119,11 +119,12 @@
                             <li><a class="dropdown-item" href="{{ url_for('manila_ho') }}">📋 Manila Home Office</a></li>
                             <li><a class="dropdown-item" href="{{ url_for('time_cal') }}">🌍 Time Zone Calculator</a></li>
                             <li><a class="dropdown-item" href="{{ url_for('allocation') }}">📢 Allocation</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('bank_holidays') }}">📴 Bank Holidays</a></li>
                         </ul>
                     </li>
 
                     <li class="nav-item mx-1">
-                        <a class="nav-link disabled text-muted" aria-disabled="true">About</a>
+                        <a class="nav-link {% if request.endpoint == 'About' %}active{% endif %}" href="{{ url_for('about') }}">About</a>
                     </li>
                 </ul>
             </div>

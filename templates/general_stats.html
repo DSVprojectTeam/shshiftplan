@@ -41,6 +41,10 @@
                 </tr>
             </tbody>
         </table>
+        <div class="text-center mt-3">
+            <h5>Average daily number of agents on online shifts in the month: <span id="avgOnlineAgents">--</span></h5>
+        </div>
+
     </div>
 
     <script>
@@ -85,6 +89,8 @@
                         </tr>`;
                         tbody.innerHTML += row;
                     });
+                    document.getElementById("avgOnlineAgents").textContent =
+                        data.averageOnlineAgents !== undefined ? data.averageOnlineAgents : '--';
                 })
                 .catch(err => {
                     document.getElementById("availability-table-body").innerHTML =
