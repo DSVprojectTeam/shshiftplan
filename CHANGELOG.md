@@ -8,7 +8,8 @@ All notable changes to this project will be documented in this file.
 
 
 ## [1.0.7] – 2025-07-03
-- [CHANGE] Updated the About page: added a table limitation notice and made minor style adjustments (smaller font size, removed 'pre' tag).
+- [CHANGE] Updated the About page: added a table limitation notice and made minor style adjustments 
+           (smaller font size, removed pre tag).
 - [NEW] Added a "Bank Holiday" sub-page under the "More" menu.
 - [NEW] Added an "RB" column in the "Day Off Summary" to help TLs quickly check how many times an employee worked on a bank holiday.
 - [NEW] Added to "General Stats" the average daily number of agents on online shifts in the month.
