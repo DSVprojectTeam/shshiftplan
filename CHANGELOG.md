@@ -7,11 +7,11 @@ All notable changes to this project will be documented in this file.
 - Restructure schedule.html code using Jinja module
 
 
-## [1.0.7] 3.07.2025
-- [CHANGE] Corrected About page. Added limitation of the table, small corrections in the style (small font, removed <pre>)
-- [NEW] Added Bank Holiday sub-page in More menu.
-- [NEW] Added RB column in Day Off Summary so TL can quickly check how many times employee worked on bank holiday. 
-- [NEW] Added in General Stats average daily number of agents on online shifts in the month
+## [1.0.7] – 2025-07-03
+- [CHANGE] Updated the About page: added a table limitation notice and made minor style adjustments (smaller font size, removed 'pre' tag).
+- [NEW] Added a "Bank Holiday" sub-page under the "More" menu.
+- [NEW] Added an "RB" column in the "Day Off Summary" to help TLs quickly check how many times an employee worked on a bank holiday.
+- [NEW] Added to "General Stats" the average daily number of agents on online shifts in the month.
 
 ## [1.0.6] 16.06.2025
 - [NEW] Added About page.
