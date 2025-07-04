@@ -77,46 +77,14 @@
                 </tr>
             </thead>
             <tbody id="dataTableBody">
-                <tr><td>01-01-2025</td><td>Mexico</td><td>New Year's Day</td><td>Start of the calendar year</td></tr>
-                <tr><td>01-01-2025</td><td>Philippines</td><td>New Year's Day</td><td>Regular holiday</td></tr>
-                <tr><td>01-01-2025</td><td>Poland</td><td>New Year's Day</td><td>First day of the year</td></tr>
-                <tr><td>06-01-2025</td><td>Poland</td><td>Epiphany</td><td>Christian feast of the Magi</td></tr>
-                <tr><td>03-02-2025</td><td>Mexico</td><td>Constitution Day</td><td>Observed holiday for 1917 Constitution</td></tr>
-                <tr><td>04-04-2025</td><td>Philippines</td><td>Eid’l Fitr</td><td>End of Ramadan</td></tr>
-                <tr><td>09-04-2025</td><td>Philippines</td><td>Day of Valor</td><td>WWII Bataan remembrance</td></tr>
-                <tr><td>17-04-2025</td><td>Mexico</td><td>Maundy Thursday</td><td>Holy Week observance</td></tr>
-                <tr><td>17-04-2025</td><td>Philippines</td><td>Maundy Thursday</td><td>Regular holiday</td></tr>
-                <tr><td>18-04-2025</td><td>Mexico</td><td>Good Friday</td><td>Bank holiday</td></tr>
-                <tr><td>18-04-2025</td><td>Philippines</td><td>Good Friday</td><td>Regular holiday</td></tr>
-                <tr><td>20-04-2025</td><td>Mexico</td><td>Easter Sunday</td><td>Observed culturally</td></tr>
-                <tr><td>20-04-2025</td><td>Poland</td><td>Easter Sunday</td><td>Christian holiday</td></tr>
-                <tr><td>21-04-2025</td><td>Poland</td><td>Easter Monday</td><td>Public holiday</td></tr>
-                <tr><td>01-05-2025</td><td>Mexico</td><td>Labour Day</td><td>Public holiday</td></tr>
-                <tr><td>01-05-2025</td><td>Philippines</td><td>Labour Day</td><td>Regular holiday</td></tr>
-                <tr><td>01-05-2025</td><td>Poland</td><td>Labour Day</td><td>International workers' day</td></tr>
-                <tr><td>03-05-2025</td><td>Poland</td><td>Constitution Day</td><td>1791 Polish Constitution</td></tr>
-                <tr><td>05-05-2025</td><td>Mexico</td><td>Cinco de Mayo</td><td>Battle of Puebla</td></tr>
-                <tr><td>08-06-2025</td><td>Poland</td><td>Whit Sunday</td><td>Pentecost Sunday</td></tr>
-                <tr><td>12-06-2025</td><td>Philippines</td><td>Independence Day</td><td>Independence from Spain</td></tr>
-                <tr><td>19-06-2025</td><td>Poland</td><td>Corpus Christi</td><td>Catholic procession holiday</td></tr>
-                <tr><td>15-08-2025</td><td>Poland</td><td>Assumption Day</td><td>Catholic feast day</td></tr>
-                <tr><td>25-08-2025</td><td>Philippines</td><td>National Heroes Day</td><td>Honors national heroes</td></tr>
-                <tr><td>16-09-2025</td><td>Mexico</td><td>Independence Day</td><td>From Spain in 1810</td></tr>
-                <tr><td>01-11-2025</td><td>Philippines</td><td>All Saints' Day</td><td>Special holiday</td></tr>
-                <tr><td>01-11-2025</td><td>Poland</td><td>All Saints' Day</td><td>Remembers the dead</td></tr>
-                <tr><td>11-11-2025</td><td>Poland</td><td>Independence Day</td><td>Regained sovereignty in 1918</td></tr>
-                <tr><td>17-11-2025</td><td>Mexico</td><td>Revolution Day</td><td>Observed Monday for 1910 revolution</td></tr>
-                <tr><td>30-11-2025</td><td>Philippines</td><td>Bonifacio Day</td><td>Revolutionary hero</td></tr>
-                <tr><td>08-12-2025</td><td>Philippines</td><td>Immaculate Conception</td><td>Feast of the Virgin Mary</td></tr>
-                <tr><td>12-12-2025</td><td>Mexico</td><td>Virgin of Guadalupe</td><td>Religious & cultural holiday</td></tr>
-                <tr><td>24-12-2025</td><td>Philippines</td><td>Christmas Eve</td><td>Special non-working day</td></tr>
-                <tr><td>24-12-2025</td><td>Poland</td><td>Christmas Eve</td><td>Now official public holiday</td></tr>
-                <tr><td>25-12-2025</td><td>Mexico</td><td>Christmas Day</td><td>National public holiday</td></tr>
-                <tr><td>25-12-2025</td><td>Philippines</td><td>Christmas Day</td><td>Regular holiday</td></tr>
-                <tr><td>25-12-2025</td><td>Poland</td><td>Christmas Day</td><td>Major national holiday</td></tr>
-                <tr><td>26-12-2025</td><td>Poland</td><td>2nd Day of Christmas</td><td>St. Stephen's Day</td></tr>
-                <tr><td>30-12-2025</td><td>Philippines</td><td>Rizal Day</td><td>Honors José Rizal</td></tr>
-                <tr><td>31-12-2025</td><td>Philippines</td><td>New Year's Eve</td><td>Special non-working day</td></tr>
+                {% for row in holidays %}
+                    <tr>
+                        <td>{{ row['Date'] }}</td>
+                        <td>{{ row['Country'] }}</td>
+                        <td>{{ row['Holiday Name'] }}</td>
+                        <td>{{ row['Description'] }}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

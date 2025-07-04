@@ -160,7 +160,14 @@ def about():
 
 @app.route('/bank_holidays')
 def bank_holidays():
-    return render_template('bank_holidays.html')
+
+    df = pd.read_excel(SCHEDULE_FILE_PATH, sheet_name="BH")
+    df['Date'] = pd.to_datetime(df['Date'], errors='coerce').dt.strftime('%d.%m.%Y')
+    df.fillna('', inplace=True)
+
+    holidays = df.to_dict(orient='records')
+
+    return render_template('bank_holidays.html', holidays=holidays)
 
 @app.route('/working_days')
 def working_days():
@@ -260,7 +267,7 @@ def get_availability():
     selected_month = datetime.strptime(selected_date, "%Y-%m-%d").replace(day=1)
     days_in_month = monthrange(selected_month.year, selected_month.month)[1]
 
-    df_clean = df.fillna("").astype(str).map(lambda x: x.strip())
+    df_clean = df.fillna("").astype(str).applymap(lambda x: x.strip())
     count = df_clean.isin(WORKING_DAYS).sum().sum()
     avg = count/days_in_month
     round(avg, 2)
