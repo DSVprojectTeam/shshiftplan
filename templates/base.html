@@ -123,6 +123,19 @@
                         </ul>
                     </li>
 
+                    <!-- Skill Dropdown -->
+                    <li class="nav-item dropdown mx-1">
+                        <a class="nav-link dropdown-toggle {% if request.endpoint in ['skill_matrix_waw'] %}active{% endif %}"
+                           href="#" id="skillDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Skill Matrix
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end animate__animated animate__fadeIn animate__faster" aria-labelledby="skillDropdown">
+                            <li><a class="dropdown-item" href="{{ url_for('skill_matrix_waw') }}">📊 Skill Matrix WAW</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('skill_matrix_mnl') }}">📊 Skill Matrix MNL</a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('skill_matrix_mx') }}">📊 Skill Matrix MX</a></li>
+                        </ul>
+                    </li>
+
                     <li class="nav-item mx-1">
                         <a class="nav-link {% if request.endpoint == 'About' %}active{% endif %}" href="{{ url_for('about') }}">About</a>
                     </li>

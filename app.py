@@ -3,10 +3,12 @@ import pandas as pd
 from datetime import datetime, timedelta
 from calendar import monthrange
 import io
+import warnings
 
 app = Flask(__name__)
 
 SCHEDULE_FILE_PATH = 'schedule.xlsx'
+SKILL_MATRIX_PATH = 'skill_matrix.xlsx'
 
 ALL_MONTHS = ['January', 'February', 'March', 'April', 'May', 'June',
               'July', 'August', 'September', 'October', 'November', 'December']
@@ -89,6 +91,8 @@ def load_schedule_data(hub=None, selected_date=None):
 
     shift_counts = df[today_str].value_counts().to_dict() if today_str in df.columns else {}
     return df, shift_counts, today_str
+
+
 
 @app.route('/')
 def index():
@@ -285,7 +289,6 @@ def manila_ho():
     
     return render_template("manila_ho.html", table=df)
 
-
 @app.route('/download_schedule')
 def download_schedule():
     selected_month = request.args.get('month') or datetime.today().strftime("%B")
@@ -301,6 +304,52 @@ def download_schedule():
         as_attachment=True,
         download_name=f'schedule_{selected_month}.csv'
     )
+
+
+# Skiprows'24' removes Other row, some people put values there
+# Warnings module for issues with data validation in excel
+
+def highlight_cells(val):
+    if pd.isna(val):
+        return 'color: red; font-weight: bold;'
+    elif val == 1:
+        return 'color: darkorange; font-weight: bold'
+    elif val == 2:
+        return 'color: orange; font-weight: bold;'
+    elif val == 3:
+        return 'color: gold; font-weight: bold;'
+    elif val == 4:
+        return 'color: green; font-weight: bold;'
+    else:
+        return ''
+
+@app.route('/skill_matrix_waw')
+def skill_matrix_waw():
+    warnings.filterwarnings(action="ignore", category=UserWarning)
+    df = pd.read_excel(SKILL_MATRIX_PATH, sheet_name=1, skiprows=[24])
+    styled_df = df.style.format(precision=0, na_rep="N/A").map(highlight_cells)
+    table_html = styled_df.hide().to_html()
+
+    return render_template("skill_matrix_waw.html", table_html=table_html)
+
+@app.route('/skill_matrix_mnl')
+def skill_matrix_mnl():
+    warnings.filterwarnings(action="ignore", category=UserWarning)
+    df = pd.read_excel(SKILL_MATRIX_PATH, sheet_name=2, skiprows=[24])
+    styled_df = df.style.format(precision=0, na_rep="N/A").map(highlight_cells)
+    table_html = styled_df.hide().to_html()
+    
+    return render_template("skill_matrix_mnl.html", table_html=table_html)
+
+
+@app.route('/skill_matrix_mx')
+def skill_matrix_mx():
+    warnings.filterwarnings(action="ignore", category=UserWarning)
+    df = pd.read_excel(SKILL_MATRIX_PATH, sheet_name=3, skiprows=[24])
+    styled_df = df.style.format(precision=0, na_rep="N/A").map(highlight_cells)
+    table_html = styled_df.hide().to_html()
+    
+    return render_template("skill_matrix_mx.html", table_html=table_html)
 
 if __name__ == "__main__":
     app.run(debug=True)
