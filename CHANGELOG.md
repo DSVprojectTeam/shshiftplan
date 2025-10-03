@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 # ToDo List
 - Add new shifts HDVL
 - Restructure schedule.html code using Jinja module
+- Format skill matrix endpoints
+- Fix dropdown arrow on first list entry
+
+## [1.0.8] - 22.09.25
+- [NEW] Added Skill Matrix endpoints
 
 
 ## [1.0.7] – 2025-07-03
